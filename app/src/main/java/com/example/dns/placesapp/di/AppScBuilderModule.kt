@@ -1,18 +1,21 @@
 package com.example.dns.placesapp.di
 
-import com.example.dns.placesapp.presentation.feature.maps.MapsActivity
-import com.example.dns.placesapp.presentation.feature.maps.di.MapsComponent
+import android.app.Activity
+import com.example.dns.placesapp.presentation.feature.main.MainActivity
+import com.example.dns.placesapp.presentation.feature.main.di.MainComponent
 import dagger.Binds
 import dagger.Module
 import dagger.android.ActivityKey
+import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
 
-@Module(subcomponents = [MapsComponent::class])
+@Module(subcomponents = [MainComponent::class])
 abstract class AppScBuilderModule {
 
     @Binds
     @IntoMap
-    @ActivityKey(MapsActivity::class)
-    abstract fun bindMapsActivityComponent(builder: MapsComponent.Builde)
+    @ActivityKey(MainActivity::class)
+    abstract fun bindMainActivityComponent(builder: MainComponent.Builde):
+            AndroidInjector.Factory<out Activity>
 
 }

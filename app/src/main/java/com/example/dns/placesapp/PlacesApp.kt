@@ -2,6 +2,7 @@ package com.example.dns.placesapp
 
 import android.app.Activity
 import android.app.Application
+import com.example.dns.placesapp.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -14,7 +15,7 @@ class PlacesApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent.create.injectApp(this)
+        DaggerAppComponent.create().injectApp(this)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector

@@ -1,4 +1,4 @@
-package com.example.dns.placesapp.presentation.feature.maps
+package com.example.dns.placesapp.presentation.feature.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,20 +9,18 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        //AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
+        setContentView(R.layout.activity_main)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        (map as? SupportMapFragment)?.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
