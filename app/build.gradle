@@ -32,6 +32,9 @@ kapt {
 ext {
     daggerVersion = '2.11'
     supportLibraryVersion = '27.1.1'
+    moxyVersion = '1.5.5'
+    rxVersion = '2.1.12'
+    rxAndroidVersion = '2.1.0'
 }
 
 dependencies {
@@ -43,10 +46,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //dagger
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation("com.google.dagger:dagger-android-support:$daggerVersion") {
         exclude group: 'com.google.code.findbugs'
     }
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    //moxy
+    implementation "com.arello-mobile:moxy:$moxyVersion"
+    annotationProcessor "com.arello-mobile:moxy-compiler:$moxyVersion"
+    implementation "com.arello-mobile:moxy-android:$moxyVersion"
+    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+    //rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
 }

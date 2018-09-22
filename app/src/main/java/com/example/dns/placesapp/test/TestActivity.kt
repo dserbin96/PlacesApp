@@ -1,21 +1,22 @@
-package com.example.dns.placesapp.presentation.feature.main
+package com.example.dns.placesapp.test
 
+import android.os.Bundle
 import android.view.View
+import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.example.dns.placesapp.R
-import com.example.dns.placesapp.presentation.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_test.*
 
-class MainActivity : BaseActivity<MainPresenter,MainView>(),MainView {
+class TestActivity : MvpAppCompatActivity(), TestView {
 
     @InjectPresenter(type = PresenterType.GLOBAL)
-    lateinit var presenter: MainPresenter
+    lateinit var presenter: TestPresenter
 
-    override fun initViews() {
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_test)
     }
-    override fun getLayoutId() = R.layout.activity_main
 
     override fun onStart() {
         super.onStart()
@@ -30,11 +31,10 @@ class MainActivity : BaseActivity<MainPresenter,MainView>(),MainView {
     }
 
     override fun hideLoaging() {
-        pbTest.visibility = View.GONE
+       pbTest.visibility = View.GONE
     }
 
     override fun showMessage(message:String) {
         tvTest.text = message
     }
-
 }
