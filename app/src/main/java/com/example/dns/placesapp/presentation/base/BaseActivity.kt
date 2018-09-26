@@ -7,13 +7,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-abstract class BaseActivity<T : BasePresenter<V>, V : BaseView> : MvpAppCompatActivity(), BaseView {
-
-    @Inject
-    lateinit var daggerPresenter: T
-
-    @ProvidePresenter
-    fun providePresenter() = daggerPresenter
+abstract class BaseActivity : MvpAppCompatActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)

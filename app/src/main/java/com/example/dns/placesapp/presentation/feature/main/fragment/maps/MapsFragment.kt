@@ -16,6 +16,10 @@ import kotlinx.android.synthetic.main.fragment_maps.*
 
 class MapsFragment : Fragment(), OnMapReadyCallback {
 
+    companion object {
+        fun getInstance(): Fragment = MapsFragment()
+    }
+
     private lateinit var mMap: GoogleMap
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
