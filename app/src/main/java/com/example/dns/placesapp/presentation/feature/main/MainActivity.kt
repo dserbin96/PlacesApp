@@ -31,6 +31,7 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun initViews() {
         presenter.start()
+        initBottomNavigation()
     }
 
     override fun onResume() {
@@ -44,7 +45,11 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     fun initBottomNavigation(){
-
+        with(navigation){
+            addItem(AHBottomNavigationItem(R.string.empty,R.drawable.ic_search,android.R.color.white))
+            addItem(AHBottomNavigationItem(R.string.empty,R.drawable.ic_search,android.R.color.white))
+            addItem(AHBottomNavigationItem(R.string.empty,R.drawable.ic_search,android.R.color.white))
+        }
     }
 
     override fun getLayoutId() = R.layout.activity_main
