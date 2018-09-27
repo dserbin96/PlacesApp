@@ -37,7 +37,7 @@ ext {
     rxAndroidVersion = '2.1.0'
     playServiceVersion = '15.0.1'
     ciceroneVersion = '2.1.0'
-    bottomNavigationVersion = '2.1.0'
+    bottomNavigationVersion = '2.2.0'
 }
 
 dependencies {

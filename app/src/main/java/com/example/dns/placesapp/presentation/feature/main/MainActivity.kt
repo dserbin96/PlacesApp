@@ -1,18 +1,23 @@
 package com.example.dns.placesapp.presentation.feature.main
 
+import android.support.v4.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.example.dns.placesapp.R
 import com.example.dns.placesapp.presentation.base.BaseActivity
+import com.example.dns.placesapp.util.MAPS
+import com.example.dns.placesapp.util.PLACES
+import com.example.dns.placesapp.util.SEARCH
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import javax.inject.Inject
 import javax.inject.Provider
 
-class MainActivity : BaseActivity(), MainView {
+class MainActivity : BaseActivity(), MainView, AHBottomNavigation.OnTabSelectedListener {
 
     @Inject
     lateinit var navigator: Navigator
@@ -44,14 +49,6 @@ class MainActivity : BaseActivity(), MainView {
         navigatorHolder.removeNavigator()
     }
 
-    fun initBottomNavigation(){
-        with(navigation){
-            addItem(AHBottomNavigationItem(R.string.empty,R.drawable.ic_search,android.R.color.white))
-            addItem(AHBottomNavigationItem(R.string.empty,R.drawable.ic_search,android.R.color.white))
-            addItem(AHBottomNavigationItem(R.string.empty,R.drawable.ic_search,android.R.color.white))
-        }
-    }
-
     override fun getLayoutId() = R.layout.activity_main
 
     override fun showLoading() {
@@ -61,6 +58,23 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun showMessage(message: String) {
+
+    }
+
+    override fun onTabSelected(position: Int, wasSelected: Boolean): Boolean {
+        presenter.navigateTo(position)
+        return true
+    }
+
+    private fun initBottomNavigation() {
+        with(btnNavigation) {
+            setOnTabSelectedListener(this@MainActivity)
+            titleState = AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE_FORCE
+            accentColor = ContextCompat.getColor(this@MainActivity, R.color.colorPrimary)
+            addItem(AHBottomNavigationItem(R.string.item_bottom_navigation_search, R.drawable.ic_search, android.R.color.white))
+            addItem(AHBottomNavigationItem(R.string.item_bottom_navigation_places, R.drawable.ic_places, android.R.color.white))
+            addItem(AHBottomNavigationItem(R.string.item_bottom_navigation_map, R.drawable.ic_map, android.R.color.white))
+        }
     }
 
 }

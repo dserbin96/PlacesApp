@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">PlacesApp</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="item_bottom_navigation_map">Карта</string>
+    <string name="item_bottom_navigation_search">Поиск</string>
+    <string name="item_bottom_navigation_places">Места</string>
     <string name="empty"></string>
 </resources>
