@@ -8,9 +8,6 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.example.dns.placesapp.R
 import com.example.dns.placesapp.presentation.base.BaseActivity
-import com.example.dns.placesapp.util.MAPS
-import com.example.dns.placesapp.util.PLACES
-import com.example.dns.placesapp.util.SEARCH
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -37,6 +34,7 @@ class MainActivity : BaseActivity(), MainView, AHBottomNavigation.OnTabSelectedL
     override fun initViews() {
         presenter.start()
         initBottomNavigation()
+        supportActionBar
     }
 
     override fun onResume() {

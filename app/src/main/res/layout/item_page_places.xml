@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_normal"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="@dimen/card_radius"
+    card_view:cardElevation="@dimen/card_elevation">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ivPlace"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_card_iv"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/kfc" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/title_size_big"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tvAdress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivPlace"
+            tools:text="KFC" />
+
+        <TextView
+            android:id="@+id/tvAdress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/padding_small"
+            app:layout_constraintBottom_toTopOf="@+id/tvTimeWork"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            tools:text="Ул. Пушкина дом Колотушкина" />
+
+        <TextView
+            android:id="@+id/tvTimeWork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/padding_small"
+            android:drawablePadding="@dimen/padding_small"
+            android:drawableStart="@drawable/ic_open_place"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAdress"
+            tools:text="Открыто до 22" />
+
+        <ImageView
+            android:id="@+id/ivMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_map_select_16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tbFavorite"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeWork" />
+
+
+        <!--СОЗДАТЬ СОБСТВЕННУЮ VIEW!!!-->
+        <ToggleButton
+            android:id="@+id/tbFavorite"
+            android:layout_width="@dimen/size_toggle_favorites_width"
+            android:layout_height="@dimen/size_toggle_favorites_height"
+            android:layout_margin="@dimen/margin_extra"
+            android:background="@drawable/background_toggle_favorites"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeWork" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

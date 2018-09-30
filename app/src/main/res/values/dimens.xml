@@ -2,5 +2,14 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="height_bottom_navigation">56dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_extra">24dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_normal">6dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="height_card_iv">178dp</dimen>
+    <dimen name="title_size_big">18sp</dimen>
+    <dimen name="size_toggle_favorites_width">16dp</dimen>
+    <dimen name="size_toggle_favorites_height">19dp</dimen>
 </resources>
