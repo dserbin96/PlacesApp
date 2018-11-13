@@ -1,6 +1,6 @@
 package com.example.dns.placesapp
 
-import com.example.dns.placesapp.presentation.model.PlaceViewModel
+import com.example.dns.placesapp.presentation.global.model.PlaceViewModel
 
 object FakeDate {
 
