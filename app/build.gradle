@@ -35,10 +35,12 @@ ext {
     moxyVersion = '1.5.5'
     rxVersion = '2.1.12'
     rxAndroidVersion = '2.1.0'
-    playServiceVersion = '15.0.1'
+    rxLocationVersion = '2.1@aar'
+    playServiceVersion = '16.0.0'
     ciceroneVersion = '2.1.0'
     bottomNavigationVersion = '2.2.0'
     glideVersion = '4.7.1'
+    permDispVersion = '3.0.0'
 }
 
 dependencies {
@@ -69,10 +71,14 @@ dependencies {
     //rx
     implementation "io.reactivex.rxjava2:rxjava:$rxVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "pl.charmas.android:android-reactive-location2:$rxLocationVersion"
     //cicerone
     implementation "ru.terrakok.cicerone:cicerone:$ciceroneVersion"
     //glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
-
+    //bottom navigate
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigationVersion"
+    //permission dispatcher
+    implementation "com.github.hotchemi:permissionsdispatcher:$permDispVersion"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permDispVersion"
 }

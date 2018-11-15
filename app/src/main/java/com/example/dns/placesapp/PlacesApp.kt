@@ -2,7 +2,7 @@ package com.example.dns.placesapp
 
 import android.app.Activity
 import android.app.Application
-import com.example.dns.placesapp.di.global.DaggerAppComponent
+import com.example.dns.placesapp.di.global.companent.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

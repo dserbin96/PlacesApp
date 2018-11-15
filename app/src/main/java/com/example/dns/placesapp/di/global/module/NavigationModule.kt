@@ -1,4 +1,4 @@
-package com.example.dns.placesapp.di.global
+package com.example.dns.placesapp.di.global.module
 
 import dagger.Module
 import dagger.Provides

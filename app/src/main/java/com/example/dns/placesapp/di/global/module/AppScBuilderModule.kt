@@ -1,8 +1,8 @@
-package com.example.dns.placesapp.di.global
+package com.example.dns.placesapp.di.global.module
 
 import android.app.Activity
-import com.example.dns.placesapp.presentation.ui.feature.main.MainActivity
 import com.example.dns.placesapp.di.feature.main.MainComponent
+import com.example.dns.placesapp.presentation.ui.feature.main.MainActivity
 import dagger.Binds
 import dagger.Module
 import dagger.android.ActivityKey

@@ -7,9 +7,9 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.example.dns.placesapp.R
-import com.example.dns.placesapp.presentation.ui.global.base.BaseActivity
 import com.example.dns.placesapp.presentation.mvp.feature.main.MainPresenter
 import com.example.dns.placesapp.presentation.mvp.feature.main.MainView
+import com.example.dns.placesapp.presentation.ui.global.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -74,6 +74,7 @@ class MainActivity : BaseActivity(), MainView, AHBottomNavigation.OnTabSelectedL
             addItem(AHBottomNavigationItem(R.string.item_bottom_navigation_search, R.drawable.ic_search, android.R.color.white))
             addItem(AHBottomNavigationItem(R.string.item_bottom_navigation_places, R.drawable.ic_places, android.R.color.white))
             addItem(AHBottomNavigationItem(R.string.item_bottom_navigation_map, R.drawable.ic_map, android.R.color.white))
+            currentItem = itemsCount - 1
         }
     }
 
