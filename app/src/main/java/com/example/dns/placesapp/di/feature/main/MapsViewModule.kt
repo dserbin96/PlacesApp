@@ -28,7 +28,7 @@ class MapsViewModule {
     fun provideLocationRequest() =
             LocationRequest.create()
                     .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setNumUpdates(5)
+                    .setNumUpdates(50)
                     .setInterval(100)
 
     @Provides

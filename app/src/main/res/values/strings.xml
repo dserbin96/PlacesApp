@@ -5,4 +5,9 @@
     <string name="item_bottom_navigation_search">Поиск</string>
     <string name="item_bottom_navigation_places">Места</string>
     <string name="empty"></string>
+
+    //HTTP Error
+    <string name="bad_request">Неправильный запрос</string>
+    <string name="uncnown_error">Неопределенная ошибка</string>
+    <string name="interner_not_connection">Нет доступа к интернету</string>
 </resources>

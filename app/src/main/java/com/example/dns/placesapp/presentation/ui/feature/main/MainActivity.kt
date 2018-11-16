@@ -61,16 +61,6 @@ class MainActivity : BaseActivity(), MainView,
 
     override fun getLayoutId() = R.layout.activity_main
 
-    override fun showLoading() {
-    }
-
-    override fun hideLoaging() {
-    }
-
-    override fun showMessage(message: String) {
-
-    }
-
     override fun onTabSelected(position: Int, wasSelected: Boolean): Boolean {
         presenter.navigateTo(position)
         return true

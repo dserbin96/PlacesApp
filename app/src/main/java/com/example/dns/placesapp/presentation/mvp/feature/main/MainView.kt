@@ -6,7 +6,4 @@ import com.example.dns.placesapp.presentation.mvp.global.base.BaseView
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView : BaseView {
-    fun showLoading()
-    fun hideLoaging()
-    fun showMessage(message:String)
 }

@@ -3,6 +3,7 @@ package com.example.dns.placesapp.presentation.ui.feature.main.maps
 import android.Manifest
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.dns.placesapp.R
@@ -13,7 +14,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.CompositeDisposable
@@ -38,6 +41,7 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback, MapsView {
 
     private lateinit var mMap: GoogleMap
     private lateinit var mapFragment: SupportMapFragment
+    private var currentPlaceMarker: Marker? = null
 
     private val completableDisposable = CompositeDisposable()
 
@@ -66,14 +70,27 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback, MapsView {
         mMap.addMarker(options)
     }
 
+    override fun currentPlaceMarker(latLng: LatLng) {
+        if (currentPlaceMarker != null) {
+            currentPlaceMarker?.position = latLng
+        } else {
+            currentPlaceMarker = mMap.addMarker(MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_current_place)))
+        }
+    }
+
+    override fun showError(error: String) {
+        //todo сделать snackbar
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    }
+
     private fun initVew() {
         mapFragment = childFragmentManager.findFragmentById(R.id.fMap)
                 as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        fabCurrentLocation.setOnClickListener {
-            presenter.currentZoom()
-        }
+        fabCurrentLocation.setOnClickListener { presenter.currentZoom() }
 
         fabMinus.setOnClickListener {
             with(mMap.cameraPosition) { mapZoom(target, zoom - 1) }
