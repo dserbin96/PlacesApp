@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.dns.placesapp.presentation.mvp.global.base.BaseView
+import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
         super.onAttach(context)
-        //AndroidSupportInjection.inject(this)
     }
 
     abstract fun layoutRes(): Int

@@ -1,22 +1,11 @@
 package com.example.dns.placesapp
 
-import android.app.Activity
-import android.app.Application
 import com.example.dns.placesapp.di.global.companent.DaggerAppComponent
 import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import javax.inject.Inject
+import dagger.android.DaggerApplication
 
-class PlacesApp : Application(), HasActivityInjector {
+class PlacesApp : DaggerApplication() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-
-    override fun onCreate() {
-        super.onCreate()
-        DaggerAppComponent.create().injectApp(this)
-    }
-
-    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication>
+            = DaggerAppComponent.builder().create(this)
 }

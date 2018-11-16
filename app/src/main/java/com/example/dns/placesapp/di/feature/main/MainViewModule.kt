@@ -16,7 +16,7 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.android.SupportAppNavigator
 
 @Module
-class MainModule {
+class MainViewModule {
 
     @Provides
     fun provideNavigator(activity: MainActivity): Navigator {

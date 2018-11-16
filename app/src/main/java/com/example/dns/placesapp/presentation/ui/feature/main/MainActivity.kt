@@ -1,5 +1,6 @@
 package com.example.dns.placesapp.presentation.ui.feature.main
 
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
@@ -10,13 +11,20 @@ import com.example.dns.placesapp.R
 import com.example.dns.placesapp.presentation.mvp.feature.main.MainPresenter
 import com.example.dns.placesapp.presentation.mvp.feature.main.MainView
 import com.example.dns.placesapp.presentation.ui.global.base.BaseActivity
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import javax.inject.Inject
 import javax.inject.Provider
 
-class MainActivity : BaseActivity(), MainView, AHBottomNavigation.OnTabSelectedListener {
+class MainActivity : BaseActivity(), MainView,
+        HasSupportFragmentInjector, AHBottomNavigation.OnTabSelectedListener {
+
+    @Inject
+    lateinit var dispatcher: DispatchingAndroidInjector<Fragment>
 
     @Inject
     lateinit var navigator: Navigator
@@ -32,6 +40,8 @@ class MainActivity : BaseActivity(), MainView, AHBottomNavigation.OnTabSelectedL
 
     @ProvidePresenter(type = PresenterType.GLOBAL)
     fun providePresenter(): MainPresenter = providePresenter.get()
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatcher
 
     override fun initViews() {
         presenter.start()
