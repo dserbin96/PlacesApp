@@ -2,9 +2,11 @@ package com.example.dns.placesapp.presentation.ui.global.base
 
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.androidadvance.topsnackbar.TSnackbar
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.example.dns.placesapp.presentation.mvp.global.base.BaseView
 import dagger.android.support.AndroidSupportInjection
@@ -22,5 +24,11 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? =
             inflater.inflate(layoutRes(), container, false)
+
+    protected fun showTopSnackBar(text:String){
+        view?.let {
+            TSnackbar.make(it,text, Snackbar.LENGTH_LONG).show()
+        }
+    }
 
 }

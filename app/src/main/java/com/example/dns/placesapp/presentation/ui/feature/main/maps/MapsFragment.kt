@@ -3,7 +3,6 @@ package com.example.dns.placesapp.presentation.ui.feature.main.maps
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.dns.placesapp.R
@@ -81,8 +80,15 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback, MapsView {
     }
 
     override fun showError(error: String) {
-        //todo сделать snackbar
-        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        showTopSnackBar(error)
+    }
+
+    override fun showLoading() {
+        loader.show()
+    }
+
+    override fun hideLoading() {
+        loader.hide()
     }
 
     private fun initVew() {

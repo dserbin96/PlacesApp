@@ -41,6 +41,10 @@ ext {
     bottomNavigationVersion = '2.2.0'
     glideVersion = '4.7.1'
     rxPermVersion = '0.10.2'
+    tsnackVersion = '1.1.1'
+    loaderVersion = '2.1.3'
+    httpLogVersion = '3.12.0'
+    retrofitVersion = '2.4.0'
 }
 
 dependencies {
@@ -81,4 +85,14 @@ dependencies {
     implementation "com.aurelhubert:ahbottomnavigation:$bottomNavigationVersion"
     //rxPermission
     implementation "com.github.tbruyelle:rxpermissions:$rxPermVersion"
+    //TopSnackbar
+    implementation "com.androidadvance:topsnackbar:$tsnackVersion"
+    //loader
+    implementation "com.wang.avi:library:$loaderVersion"
+    //network
+    implementation "com.squareup.okhttp3:okhttp:$httpLogVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpLogVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 }

@@ -12,4 +12,6 @@ interface MapsView : BaseView, CanShowError {
     fun mapZoom(latLng: LatLng, zoom: Float)
     fun addMarker(options: MarkerOptions)
     fun currentPlaceMarker(latLng: LatLng)
+    fun showLoading()
+    fun hideLoading()
 }
