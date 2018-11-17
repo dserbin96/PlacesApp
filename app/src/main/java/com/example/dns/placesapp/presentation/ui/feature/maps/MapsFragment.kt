@@ -1,4 +1,4 @@
-package com.example.dns.placesapp.presentation.ui.feature.main.maps
+package com.example.dns.placesapp.presentation.ui.feature.maps
 
 import android.Manifest
 import android.os.Bundle
@@ -6,9 +6,10 @@ import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.dns.placesapp.R
-import com.example.dns.placesapp.presentation.mvp.feature.main.maps.MapsPresenter
-import com.example.dns.placesapp.presentation.mvp.feature.main.maps.MapsView
+import com.example.dns.placesapp.presentation.mvp.feature.maps.MapsPresenter
+import com.example.dns.placesapp.presentation.mvp.feature.maps.MapsView
 import com.example.dns.placesapp.presentation.ui.global.base.BaseFragment
+import com.example.dns.placesapp.presentation.ui.global.delegetes.LoaderDelegate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -31,6 +32,9 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback, MapsView {
 
     @Inject
     lateinit var providePresenter: Provider<MapsPresenter>
+
+    @Inject
+    lateinit var loaderDelegate: LoaderDelegate
 
     @InjectPresenter
     lateinit var presenter: MapsPresenter
@@ -84,11 +88,11 @@ class MapsFragment : BaseFragment(), OnMapReadyCallback, MapsView {
     }
 
     override fun showLoading() {
-        loader.show()
+        loaderDelegate.showLoading()
     }
 
     override fun hideLoading() {
-        loader.hide()
+        loaderDelegate.hideLoading()
     }
 
     private fun initVew() {

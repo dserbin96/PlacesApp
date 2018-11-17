@@ -1,8 +1,9 @@
-package com.example.dns.placesapp.presentation.mvp.feature.main.maps
+package com.example.dns.placesapp.presentation.mvp.feature.maps
 
 import android.annotation.SuppressLint
 import android.location.Location
 import com.arellomobile.mvp.InjectViewState
+import com.example.dns.placesapp.domain.feature.maps.SearchUseCase
 import com.example.dns.placesapp.domain.global.manager.SchedulersProvider
 import com.example.dns.placesapp.presentation.mvp.global.base.ErrorHandlingPresenter
 import com.example.dns.placesapp.presentation.mvp.global.error.ErrorHandler
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLocationProvider,
                                         private val schedulersProvider: SchedulersProvider,
                                         private val locationRequest: LocationRequest,
-                                        override val errorHandler: ErrorHandler) :
+                                        override val errorHandler: ErrorHandler,
+                                        private val searchUseCase: SearchUseCase) :
         ErrorHandlingPresenter<MapsView>(), Consumer<Location> {
 
     companion object {
@@ -36,10 +38,18 @@ class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLo
     }
 
     fun currentZoom() {
-        currentLocation?.let {
-            val latLng = LatLng(it.latitude, it.longitude)
-            viewState?.mapZoom(latLng, DEFAULT_ZOOM)
-        }
+        val latLng = currentLocation?.let { LatLng(it.latitude, it.longitude) } ?: LatLng(0.0, 0.0)
+        addToDisposable(searchUseCase
+                .execute(SearchUseCase.Params(latLng))
+                .subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
+                .doOnSubscribe { viewState?.showLoading() }
+                .doFinally {
+                    viewState?.hideLoading()
+                    viewState?.mapZoom(latLng, DEFAULT_ZOOM)
+                }
+                .subscribe({ },
+                        { t -> errorHandler.proceed(t) }))
     }
 
     override fun accept(location: Location) {

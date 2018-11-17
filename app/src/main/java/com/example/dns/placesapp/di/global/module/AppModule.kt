@@ -8,6 +8,7 @@ import com.example.dns.placesapp.domain.global.manager.SchedulersProvider
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
 @Module
 class AppModule {
@@ -27,5 +28,9 @@ class AppModule {
     @PerApplication
     @Provides
     fun provideGson() = Gson()
+
+    @PerApplication
+    @Provides
+    fun provideCompositeDisposable() = CompositeDisposable()
 
 }

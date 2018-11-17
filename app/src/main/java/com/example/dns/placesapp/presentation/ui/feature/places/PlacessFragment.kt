@@ -1,11 +1,11 @@
-package com.example.dns.placesapp.presentation.ui.feature.main.places
+package com.example.dns.placesapp.presentation.ui.feature.places
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
 import com.example.dns.placesapp.R
 import com.example.dns.placesapp.presentation.ui.global.base.BaseFragment
-import com.example.dns.placesapp.presentation.mvp.feature.main.places.page.PlacesView
+import com.example.dns.placesapp.presentation.mvp.feature.places.page.PlacesView
 import kotlinx.android.synthetic.main.fragment_places.*
 
 class PlacessFragment : BaseFragment(), PlacesView {

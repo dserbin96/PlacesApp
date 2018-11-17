@@ -1,4 +1,4 @@
-package com.example.dns.placesapp.di.feature.main
+package com.example.dns.placesapp.di.feature.maps
 
 import android.content.Context
 import com.google.android.gms.location.LocationRequest

@@ -1,4 +1,4 @@
-package com.example.dns.placesapp.presentation.ui.feature.main.places.page
+package com.example.dns.placesapp.presentation.ui.feature.places.page
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
