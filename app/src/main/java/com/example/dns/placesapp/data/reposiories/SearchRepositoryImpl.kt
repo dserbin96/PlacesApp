@@ -13,6 +13,6 @@ class SearchRepositoryImpl @Inject constructor(private val api: FoursquareApi,
                                                private val map: PlaceEntityMapper) : SearchRepository {
     override fun searchPlace(latLng: LatLng): Single<List<PlaceEntity?>> {
         return api.searchPlace(latLng.toStringWeb())
-                .map { places -> places.response?.map { map.mapToPlaceEntity(it) } }
+                .map { places -> places.response?.places?.map { map.mapToPlaceEntity(it) } }
     }
 }
