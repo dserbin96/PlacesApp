@@ -1,8 +1,9 @@
 package com.example.dns.placesapp.domain.global.repositories
 
+import com.example.dns.placesapp.domain.global.entity.PlaceEntity
 import com.google.android.gms.maps.model.LatLng
-import io.reactivex.Completable
+import io.reactivex.Single
 
 interface SearchRepository {
-    fun searchPlace(latLng: LatLng) : Completable
+    fun searchPlace(latLng: LatLng) : Single<List<PlaceEntity?>>
 }
