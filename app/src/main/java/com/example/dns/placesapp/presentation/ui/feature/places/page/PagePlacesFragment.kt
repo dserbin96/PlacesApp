@@ -3,11 +3,10 @@ package com.example.dns.placesapp.presentation.ui.feature.places.page
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.example.dns.placesapp.FakeDate
 import com.example.dns.placesapp.R
-import com.example.dns.placesapp.presentation.ui.global.base.BaseFragment
-import com.example.dns.placesapp.presentation.ui.adapter.PlacesAdapter
 import com.example.dns.placesapp.presentation.global.model.PlaceViewModel
+import com.example.dns.placesapp.presentation.ui.adapter.PlacesAdapter
+import com.example.dns.placesapp.presentation.ui.global.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_page_places.*
 
 class PagePlacesFragment : BaseFragment(), PagePlacesView {
@@ -24,7 +23,6 @@ class PagePlacesFragment : BaseFragment(), PagePlacesView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        showList(FakeDate.getList())//delete
     }
 
     override fun showList(list: List<PlaceViewModel>) {

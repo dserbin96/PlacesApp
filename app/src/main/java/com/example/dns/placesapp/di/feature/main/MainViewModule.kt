@@ -6,9 +6,11 @@ import com.example.dns.placesapp.R
 import com.example.dns.placesapp.di.global.scope.PerActivity
 import com.example.dns.placesapp.presentation.mvp.global.MAPS
 import com.example.dns.placesapp.presentation.mvp.global.PLACES
+import com.example.dns.placesapp.presentation.mvp.global.PLACE_INFO
 import com.example.dns.placesapp.presentation.mvp.global.SEARCH
 import com.example.dns.placesapp.presentation.ui.feature.main.MainActivity
 import com.example.dns.placesapp.presentation.ui.feature.maps.MapsFragment
+import com.example.dns.placesapp.presentation.ui.feature.place_info.PlaceInfoFragment
 import com.example.dns.placesapp.presentation.ui.feature.places.PlacessFragment
 import com.example.dns.placesapp.presentation.ui.feature.search.SearchFragment
 import com.example.dns.placesapp.presentation.ui.global.delegetes.LoaderDelegate
@@ -34,6 +36,7 @@ class MainViewModule {
                         MAPS -> MapsFragment.getInstance()
                         PLACES -> PlacessFragment.getInstance()
                         SEARCH -> SearchFragment.getInstance()
+                        PLACE_INFO -> PlaceInfoFragment.getInstance()
                         else -> MapsFragment.getInstance()
                     }
 

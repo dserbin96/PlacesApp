@@ -13,4 +13,4 @@ data class LocationDTO(val address: String,
                        val city: String,
                        val state: String,
                        val country: String,
-                       val formattedAdress: FormattedAddress?)
+                       val formattedAdress: List<String>?)

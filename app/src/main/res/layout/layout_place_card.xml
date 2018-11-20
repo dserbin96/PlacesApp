@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_small"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="10dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPlace"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/margin_extra"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/kfc" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_extra"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:padding="@dimen/padding_small"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/title_size_big"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivPlace"
+            app:layout_constraintTop_toTopOf="@+id/ivPlace"
+            tools:text="KFC" />
+
+        <RatingBar
+            android:id="@+id/rbPlace"
+            style="?android:attr/ratingBarStyleSmall"
+            android:theme="@style/GrayRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:layout_marginTop="@dimen/padding_small"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:rating="2.0"
+            android:stepSize="1.0"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPlace"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+
+        <TextView
+            android:id="@+id/tvStreat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textColor="@color/textGray"
+            app:layout_constraintEnd_toStartOf="@+id/tvDistancePlace"
+            app:layout_constraintStart_toStartOf="@+id/ivPlace"
+            app:layout_constraintTop_toBottomOf="@+id/ivPlace"
+            tools:text="ул.Красная 138" />
+
+        <TextView
+            android:id="@+id/tvDistancePlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_extra"
+            android:drawableStart="@drawable/ic_lenght_place"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStreat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvStreat"
+            tools:text="1.3 км" />
+
+        <TextView
+            android:id="@+id/tvTimeWork"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
+            android:drawablePadding="@dimen/padding_small"
+            android:drawableStart="@drawable/ic_open_place"
+            android:textColor="@color/textGray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvStreat"
+            app:layout_constraintStart_toStartOf="@+id/tvStreat"
+            app:layout_constraintTop_toBottomOf="@+id/tvStreat"
+            tools:text="Открыто до 22:00" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

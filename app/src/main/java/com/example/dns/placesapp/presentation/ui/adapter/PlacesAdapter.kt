@@ -4,11 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.example.dns.placesapp.R
 import com.example.dns.placesapp.presentation.global.model.PlaceViewModel
-import kotlinx.android.synthetic.main.item_page_places.view.*
 
 class PlacesAdapter : RecyclerView.Adapter<PlacesAdapter.PlaceViewHolder>() {
 
@@ -33,7 +30,7 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesAdapter.PlaceViewHolder>() {
     class PlaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItem(model: PlaceViewModel) {
-            with(itemView){
+            /*with(itemView){
                 Glide.with(this).load(model.imagePath).into(ivPlace)
                 tvName.text = model.name
                 tvAdress.text = model.adress
@@ -42,7 +39,7 @@ class PlacesAdapter : RecyclerView.Adapter<PlacesAdapter.PlaceViewHolder>() {
                     Toast.makeText(this.context,"MAP",Toast.LENGTH_SHORT).show()
                 }
                 tbFavorite.isChecked = model.isFavorites
-            }
+            }*/
         }
     }
 

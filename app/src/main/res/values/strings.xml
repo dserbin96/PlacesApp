@@ -10,4 +10,5 @@
     <string name="bad_request">Неправильный запрос</string>
     <string name="uncnown_error">Неопределенная ошибка</string>
     <string name="interner_not_connection">Нет доступа к интернету</string>
+    <string name="example">Example</string>
 </resources>
