@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPlace"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_image_place_detail"
+            android:contentDescription="@string/empty"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/kfc" />
+
+        <FrameLayout
+            android:id="@+id/flPlaceInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ivPlace"
+            tools:visibility="gone">
+
+            <include layout="@layout/layout_place_card" />
+
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/ibRoute"
+            android:layout_width="@dimen/size_image_button"
+            android:layout_height="@dimen/size_image_button"
+            android:layout_margin="@dimen/margin_extra"
+            android:background="@drawable/background_circle_image"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/ic_lenght_place_big"
+            app:layout_constraintBottom_toTopOf="@id/llGalary"
+            app:layout_constraintEnd_toStartOf="@+id/ibFavorite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/flPlaceInfo" />
+
+        <ImageButton
+            android:id="@+id/ibFavorite"
+            android:layout_width="@dimen/size_image_button"
+            android:layout_height="@dimen/size_image_button"
+            android:layout_margin="@dimen/margin_extra"
+            android:background="@drawable/background_circle_image"
+            android:contentDescription="@string/empty"
+            android:src="@drawable/ic_faforites"
+            app:layout_constraintBottom_toTopOf="@id/llGalary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ibRoute"
+            app:layout_constraintTop_toBottomOf="@id/flPlaceInfo" />
+
+        <LinearLayout
+            android:id="@+id/llGalary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ibFavorite">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_extra"
+                android:text="@string/galare"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/title_size_big"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -12,4 +12,6 @@
     <dimen name="title_size_big">18sp</dimen>
     <dimen name="size_toggle_favorites_width">16dp</dimen>
     <dimen name="size_toggle_favorites_height">19dp</dimen>
+    <dimen name="height_image_place_detail">250dp</dimen>
+    <dimen name="size_image_button">70dp</dimen>
 </resources>

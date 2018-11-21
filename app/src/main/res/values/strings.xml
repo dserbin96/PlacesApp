@@ -11,4 +11,6 @@
     <string name="uncnown_error">Неопределенная ошибка</string>
     <string name="interner_not_connection">Нет доступа к интернету</string>
     <string name="example">Example</string>
+    <string name="contacts">Контакты</string>
+    <string name="galare">Галерея</string>
 </resources>
