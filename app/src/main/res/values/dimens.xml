@@ -14,4 +14,6 @@
     <dimen name="size_toggle_favorites_height">19dp</dimen>
     <dimen name="height_image_place_detail">250dp</dimen>
     <dimen name="size_image_button">70dp</dimen>
+    <dimen name="ridius_card">10dp</dimen>
+    <dimen name="margine_card_info">235dp</dimen>
 </resources>

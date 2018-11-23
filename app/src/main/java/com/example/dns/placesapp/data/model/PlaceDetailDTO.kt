@@ -9,6 +9,6 @@ data class PlaceDetailDTO(val id: String,
                           val rating: Float?,
                           val ratingColor: String?,
                           val photos: PlacesPhotoDTO?,
-                          @SerializedName("timeframes")
+                          @SerializedName("popular")
                           val timeWork: WeekDTO?,
                           val bestPhoto: PhotoDTO?)

@@ -13,6 +13,7 @@ import com.example.dns.placesapp.presentation.mvp.feature.maps.MapsPresenter
 import com.example.dns.placesapp.presentation.mvp.feature.maps.MapsView
 import com.example.dns.placesapp.presentation.ui.global.base.BaseFragment
 import com.example.dns.placesapp.presentation.ui.global.delegetes.LoaderDelegate
+import com.example.dns.placesapp.presentation.ui.global.expansion.gone
 import com.example.dns.placesapp.presentation.ui.global.expansion.visibile
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -62,7 +63,7 @@ class MapsFragment : BaseFragment(), MapsView,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initVew()
-        initPermission()
+        showMyLocation()
     }
 
     override fun onDestroy() {
@@ -113,13 +114,22 @@ class MapsFragment : BaseFragment(), MapsView,
 
     override fun showPlace(model: PlaceDetailViewModel, myLocation: Location) {
         cardPlace.visibile()
+        groupContackt.gone()
         Glide.with(this).load(model.basePhoto).into(ivPlace)
         tvName.text = model.name
         model.rating?.let { rbPlace.rating = it } ?: let { rbPlace.visibile(false) }
         tvStreat.text = model.address
         tvTimeWork.text = model.timeWorks?.get(0)//todo ориентироваться по времени
-        val location = Location(model.name)
-        tvDistancePlace.text = "${location.distanceTo(myLocation)}"
+        model.latLng?.let {
+            val floatMas = FloatArray(4)
+            Location.distanceBetween(myLocation.latitude, myLocation.longitude,
+                    it.latitude, it.longitude, floatMas)
+            tvDistancePlace.text = (floatMas[0] / 1000).toString()
+        } ?: let {
+            tvDistancePlace.gone()
+        }
+        tvDistancePlace.text = "1.3"
+        cardPlace.setOnClickListener { presenter.showPlaceInfo(model) }
     }
 
     override fun showError(error: String) {
@@ -139,7 +149,7 @@ class MapsFragment : BaseFragment(), MapsView,
                 as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        fabCurrentLocation.setOnClickListener { presenter.currentZoom() }
+        fabCurrentLocation.setOnClickListener { showMyLocation() }
 
         fabMinus.setOnClickListener {
             with(mMap.cameraPosition) { mapZoom(target, zoom - 1) }
@@ -148,16 +158,12 @@ class MapsFragment : BaseFragment(), MapsView,
         fabPlus.setOnClickListener {
             with(mMap.cameraPosition) { mapZoom(target, zoom + 1) }
         }
-
-        cardPlace.setOnClickListener {
-            presenter.showPlaceInfo()
-        }
     }
 
-    private fun initPermission() {
+    private fun showMyLocation() {
         completableDisposable.add(RxPermissions(this)
                 .request(Manifest.permission.ACCESS_FINE_LOCATION)
-                .subscribe { presenter.start() })
+                .subscribe { presenter.currentLocation() })
     }
 
 }

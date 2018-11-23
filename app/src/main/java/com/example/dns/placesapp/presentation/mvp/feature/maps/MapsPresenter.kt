@@ -10,14 +10,14 @@ import com.example.dns.placesapp.domain.global.manager.ResourceManager
 import com.example.dns.placesapp.domain.global.manager.SchedulersProvider
 import com.example.dns.placesapp.presentation.global.mapper.PlaceDetailViewMapper
 import com.example.dns.placesapp.presentation.global.mapper.PlaceViewMapper
+import com.example.dns.placesapp.presentation.global.model.PlaceDetailViewModel
 import com.example.dns.placesapp.presentation.global.model.PlaceViewModel
+import com.example.dns.placesapp.presentation.mvp.global.DataPlaceInfo
 import com.example.dns.placesapp.presentation.mvp.global.PLACE_INFO
 import com.example.dns.placesapp.presentation.mvp.global.base.ErrorHandlingPresenter
 import com.example.dns.placesapp.presentation.mvp.global.error.ErrorHandler
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import io.reactivex.functions.Consumer
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -25,7 +25,7 @@ import javax.inject.Inject
 @InjectViewState
 class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLocationProvider,
                                         private val schedulersProvider: SchedulersProvider,
-                                        private val locationRequest: LocationRequest,
+                                        //private val locationRequest: LocationRequest,
                                         override val errorHandler: ErrorHandler,
                                         private val searchUseCase: SearchUseCase,
                                         private val resourceManager: ResourceManager,
@@ -33,7 +33,7 @@ class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLo
                                         private val getPlaceUseCase: GetPlaceUseCase,
                                         private val placeDetailViewMapper: PlaceDetailViewMapper,
                                         private val router: Router) :
-        ErrorHandlingPresenter<MapsView>(), Consumer<Location> {
+        ErrorHandlingPresenter<MapsView>() {
 
     companion object {
         private const val DEFAULT_ZOOM = 15f
@@ -42,23 +42,45 @@ class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLo
     private var currentLocation: Location? = null
     private var places = mutableListOf<PlaceViewModel>()
 
-    override fun accept(location: Location) {
-        currentLocation = location
-        viewState?.currentPlaceMarker(LatLng(location.latitude, location.longitude))
-    }
-
     @SuppressLint("MissingPermission")
-    fun start() {
+    fun currentLocation() {
         addToDisposable(locationProvider
-                .getUpdatedLocation(locationRequest)
+                .lastKnownLocation
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
-                .subscribe(this,
-                        Consumer<Throwable> { t -> errorHandler.proceed(t) }))
+                .subscribe({
+                    currentLocation = it
+                    viewState?.currentPlaceMarker(LatLng(it.latitude, it.longitude))
+                    currentZoom(it)
+                }, { t -> errorHandler.proceed(t) }))
     }
 
-    fun currentZoom() {
-        val latLng = currentLocation?.let { LatLng(it.latitude, it.longitude) } ?: LatLng(0.0, 0.0)
+    fun showPlaceInfo(place: PlaceDetailViewModel) {
+        router.newScreenChain(PLACE_INFO, DataPlaceInfo(place))
+    }
+
+    fun getPlace(id: String) {
+        val place = places.filter { it.id == id }.first()
+        addToDisposable(getPlaceUseCase.execute(GetPlaceUseCase.Params(id))
+                .subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
+                .doOnSubscribe { viewState?.showLoading() }
+                .map { placeDetailViewMapper.mapToPlaceDetailView(it) }
+                .doFinally {
+                    viewState?.hideLoading()
+                    viewState?.mapZoom(place.latLng)
+                }
+                .subscribe({ model ->
+                    run {
+                        model?.let {
+                            viewState?.showPlace(it, currentLocation ?: Location(""))
+                        }
+                    }
+                }, { errorHandler.proceed(it) }))
+    }
+
+    private fun currentZoom(location: Location) {
+        val latLng = LatLng(location.latitude, location.longitude)
         addToDisposable(searchUseCase
                 .execute(SearchUseCase.Params(latLng))
                 .subscribeOn(schedulersProvider.io())
@@ -71,30 +93,6 @@ class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLo
                 }
                 .subscribe({ places -> places?.let { addPlace(it) } },
                         { t -> errorHandler.proceed(t) }))//todo ErrorModel
-    }
-
-    fun showPlaceInfo(){
-        router.backTo(PLACE_INFO)
-    }
-
-    fun getPlace(id: String) {
-        val place = places.filter { it.id == id }.first()
-        addToDisposable(getPlaceUseCase.execute(GetPlaceUseCase.Params(id))
-                .subscribeOn(schedulersProvider.io())
-                .observeOn(schedulersProvider.ui())
-                .doOnSubscribe { viewState?.showLoading() }
-                .map { placeDetailViewMapper.mapToPlaceDetailView(it) }
-                .doFinally {
-                    viewState?.hideLoading()
-                    viewState?.mapZoom(place.latLng, DEFAULT_ZOOM)
-                }
-                .subscribe({ model ->
-                    run {
-                        model?.let {
-                            viewState?.showPlace(it, currentLocation ?: Location(""))
-                        }
-                    }
-                }, { errorHandler.proceed(it) }))
     }
 
     private fun addPlace(places: List<PlaceViewModel>) {

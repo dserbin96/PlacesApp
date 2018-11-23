@@ -51,11 +51,16 @@
         app:layout_constraintBottom_toBottomOf="@id/fMap"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <include
-        android:id="@+id/cardPlace"
-        layout="@layout/layout_place_card"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include
+            android:id="@+id/cardPlace"
+            layout="@layout/layout_place_card" />
+
+    </FrameLayout>
+
 
 </android.support.constraint.ConstraintLayout>

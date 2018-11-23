@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.rmiri.skeleton.SkeletonGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/seletonGroup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_small"
+    android:background="@drawable/background_place">
+
+    <io.rmiri.skeleton.SkeletonView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/empty"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/kfc" />
+
+    </io.rmiri.skeleton.SkeletonView>
+
+</io.rmiri.skeleton.SkeletonGroup>

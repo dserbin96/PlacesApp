@@ -4,10 +4,7 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import com.example.dns.placesapp.R
 import com.example.dns.placesapp.di.global.scope.PerActivity
-import com.example.dns.placesapp.presentation.mvp.global.MAPS
-import com.example.dns.placesapp.presentation.mvp.global.PLACES
-import com.example.dns.placesapp.presentation.mvp.global.PLACE_INFO
-import com.example.dns.placesapp.presentation.mvp.global.SEARCH
+import com.example.dns.placesapp.presentation.mvp.global.*
 import com.example.dns.placesapp.presentation.ui.feature.main.MainActivity
 import com.example.dns.placesapp.presentation.ui.feature.maps.MapsFragment
 import com.example.dns.placesapp.presentation.ui.feature.place_info.PlaceInfoFragment
@@ -36,7 +33,11 @@ class MainViewModule {
                         MAPS -> MapsFragment.getInstance()
                         PLACES -> PlacessFragment.getInstance()
                         SEARCH -> SearchFragment.getInstance()
-                        PLACE_INFO -> PlaceInfoFragment.getInstance()
+                        PLACE_INFO -> {
+                            (data as? DataPlaceInfo)?.let {
+                                PlaceInfoFragment.getInstance(it.place)
+                            }
+                        }
                         else -> MapsFragment.getInstance()
                     }
 
