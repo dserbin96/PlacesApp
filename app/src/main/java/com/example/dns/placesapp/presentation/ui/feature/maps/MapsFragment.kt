@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_maps.*
+import kotlinx.android.synthetic.main.fragment_place_info.*
 import kotlinx.android.synthetic.main.layout_place_card.*
 import timber.log.Timber
 import java.util.*

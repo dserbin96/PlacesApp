@@ -7,7 +7,7 @@
     android:background="@drawable/background_place">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivPlace"
+        android:id="@+id/ivBasePlace"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="@dimen/margin_extra"
@@ -26,8 +26,8 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/title_size_big"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivPlace"
-        app:layout_constraintTop_toTopOf="@+id/ivPlace"
+        app:layout_constraintStart_toEndOf="@+id/ivBasePlace"
+        app:layout_constraintTop_toTopOf="@+id/ivBasePlace"
         tools:text="KFC" />
 
     <RatingBar
@@ -42,7 +42,7 @@
         android:rating="2.0"
         android:stepSize="1.0"
         android:theme="@style/GrayRatingBar"
-        app:layout_constraintBottom_toBottomOf="@+id/ivPlace"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBasePlace"
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
