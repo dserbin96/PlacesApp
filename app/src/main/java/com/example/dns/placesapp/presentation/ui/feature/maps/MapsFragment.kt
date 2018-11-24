@@ -3,6 +3,7 @@ package com.example.dns.placesapp.presentation.ui.feature.maps
 import android.Manifest
 import android.location.Location
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -28,11 +29,13 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_maps.*
 import kotlinx.android.synthetic.main.layout_place_card.*
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Provider
 
 class MapsFragment : BaseFragment(), MapsView,
         OnMapReadyCallback,
+        GoogleMap.OnMapClickListener,
         GoogleMap.OnMarkerClickListener,
         GoogleMap.OnMapLongClickListener {
 
@@ -75,6 +78,7 @@ class MapsFragment : BaseFragment(), MapsView,
         mMap = googleMap
         mMap.setOnMapLongClickListener(this)
         mMap.setOnMarkerClickListener(this)
+        mMap.setOnMapClickListener(this)
     }
 
     override fun onMarkerClick(marker: Marker?): Boolean {
@@ -86,6 +90,10 @@ class MapsFragment : BaseFragment(), MapsView,
 
     override fun onMapLongClick(latLng: LatLng?) {
         Timber.d(latLng.toString())
+    }
+
+    override fun onMapClick(p0: LatLng?) {
+        cardPlace.gone()
     }
 
     override fun mapZoom(latLng: LatLng, zoom: Float) {
@@ -115,20 +123,35 @@ class MapsFragment : BaseFragment(), MapsView,
     override fun showPlace(model: PlaceDetailViewModel, myLocation: Location) {
         cardPlace.visibile()
         groupContackt.gone()
-        Glide.with(this).load(model.basePhoto).into(ivPlace)
+        if (model.basePhoto.isNullOrEmpty()) ivPlace.gone()
+        else Glide.with(this).load(model.basePhoto).into(ivPlace)
         tvName.text = model.name
         model.rating?.let { rbPlace.rating = it } ?: let { rbPlace.visibile(false) }
         tvStreat.text = model.address
-        tvTimeWork.text = model.timeWorks?.get(0)//todo ориентироваться по времени
+        when (model.isOpen) {
+            true -> {
+                model.timeWork?.let { calendar ->
+                    context?.let { tvTimeWork.setCompoundDrawablesRelative(ContextCompat.getDrawable(it, R.drawable.ic_current_place), null, null, null) }
+                    val time = getString(R.string.open) + " " + calendar.get(Calendar.HOUR_OF_DAY).toString()
+                    tvTimeWork.text = time
+                    tvTimeWork.visibile()
+                } ?: let {
+                    tvTimeWork.gone()
+                }
+            }
+            false -> tvTimeWork.text = getString(R.string.close)
+            else -> tvTimeWork.gone()
+        }
         model.latLng?.let {
             val floatMas = FloatArray(4)
             Location.distanceBetween(myLocation.latitude, myLocation.longitude,
                     it.latitude, it.longitude, floatMas)
-            tvDistancePlace.text = (floatMas[0] / 1000).toString()
+            val strDistance = String.format("%.2f", (floatMas[0] / 1000)) +
+                    " " + getString(R.string.distance)
+            tvDistancePlace.text = strDistance
         } ?: let {
             tvDistancePlace.gone()
         }
-        tvDistancePlace.text = "1.3"
         cardPlace.setOnClickListener { presenter.showPlaceInfo(model) }
     }
 

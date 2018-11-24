@@ -5,6 +5,9 @@
     <string name="item_bottom_navigation_search">Поиск</string>
     <string name="item_bottom_navigation_places">Места</string>
     <string name="empty"></string>
+    <string name="distance">км</string>
+    <string name="open">Открыто до </string>
+    <string name="close">Закрыть</string>
 
     //HTTP Error
     <string name="bad_request">Неправильный запрос</string>

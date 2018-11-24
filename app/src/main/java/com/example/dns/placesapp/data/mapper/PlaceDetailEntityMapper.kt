@@ -18,8 +18,9 @@ class PlaceDetailEntityMapper @Inject constructor(private val mapperCategory: Ca
                     place.categories?.map { mapperCategory.mapToCategoryEntity(it) },
                     place.rating,
                     place.photos?.items?.map { mapperPhoto.mapToString(it) },
-                    place.timeWork?.timeframes?.map { it.days },
-                    mapperPhoto.mapToString(place.bestPhoto))
+                    mapperPhoto.mapToString(place.bestPhoto),
+                    place.timeWork?.isOpen,
+                    place.timeWork?.timeframes?.get(0)?.open?.get(0)?.renderedTime)
         }
     }
 
