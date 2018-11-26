@@ -11,4 +11,5 @@ data class PlaceDetailDTO(val id: String,
                           val photos: PlacesPhotoDTO?,
                           @SerializedName("popular")
                           val timeWork: WeekDTO?,
-                          val bestPhoto: PhotoDTO?)
+                          val bestPhoto: PhotoDTO?,
+                          val description: String?)

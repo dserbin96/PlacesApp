@@ -27,7 +27,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_maps.*
-import kotlinx.android.synthetic.main.fragment_place_info.*
 import kotlinx.android.synthetic.main.layout_place_card.*
 import timber.log.Timber
 import java.util.*
@@ -124,10 +123,10 @@ class MapsFragment : BaseFragment(), MapsView,
     override fun showPlace(model: PlaceDetailViewModel, myLocation: Location) {
         cardPlace.visibile()
         groupContackt.gone()
-        if (model.basePhoto.isNullOrEmpty()) ivPlace.gone()
-        else Glide.with(this).load(model.basePhoto).into(ivPlace)
+        if (model.basePhoto.isNullOrEmpty()) ivCirclePlace.gone()
+        else Glide.with(this).load(model.basePhoto).into(ivCirclePlace)
         tvName.text = model.name
-        model.rating?.let { rbPlace.rating = it } ?: let { rbPlace.visibile(false) }
+        model.rating?.let { rbPlace.rating = it/2 } ?: let { rbPlace.visibile(false) }
         tvStreat.text = model.address
         when (model.isOpen) {
             true -> {

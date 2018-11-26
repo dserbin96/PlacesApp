@@ -25,7 +25,7 @@ import javax.inject.Inject
 @InjectViewState
 class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLocationProvider,
                                         private val schedulersProvider: SchedulersProvider,
-                                        //private val locationRequest: LocationRequest,
+        //private val locationRequest: LocationRequest,
                                         override val errorHandler: ErrorHandler,
                                         private val searchUseCase: SearchUseCase,
                                         private val resourceManager: ResourceManager,
@@ -48,15 +48,17 @@ class MapsPresenter @Inject constructor(private val locationProvider: ReactiveLo
                 .lastKnownLocation
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
-                .subscribe({
-                    currentLocation = it
-                    viewState?.currentPlaceMarker(LatLng(it.latitude, it.longitude))
-                    currentZoom(it)
+                .subscribe({ location ->
+                    currentLocation = location
+                    viewState?.currentPlaceMarker(LatLng(location.latitude, location.longitude))
+                    currentZoom(location)
                 }, { t -> errorHandler.proceed(t) }))
     }
 
     fun showPlaceInfo(place: PlaceDetailViewModel) {
-        router.newScreenChain(PLACE_INFO, DataPlaceInfo(place))
+        currentLocation?.let {
+            router.newScreenChain(PLACE_INFO, DataPlaceInfo(place, it))
+        }
     }
 
     fun getPlace(id: String) {

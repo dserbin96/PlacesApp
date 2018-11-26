@@ -7,7 +7,7 @@
     android:background="@drawable/background_place">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivBasePlace"
+        android:id="@+id/ivCirclePlace"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="@dimen/margin_extra"
@@ -26,8 +26,8 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/title_size_big"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivBasePlace"
-        app:layout_constraintTop_toTopOf="@+id/ivBasePlace"
+        app:layout_constraintStart_toEndOf="@+id/ivCirclePlace"
+        app:layout_constraintTop_toTopOf="@+id/ivCirclePlace"
         tools:text="KFC" />
 
     <RatingBar
@@ -38,11 +38,11 @@
         android:layout_marginBottom="@dimen/padding_small"
         android:layout_marginTop="@dimen/padding_small"
         android:isIndicator="false"
-        android:numStars="6"
+        android:numStars="5"
         android:rating="2.0"
         android:stepSize="1.0"
         android:theme="@style/GrayRatingBar"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBasePlace"
+        app:layout_constraintBottom_toBottomOf="@+id/ivCirclePlace"
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
@@ -54,6 +54,7 @@
         android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginStart="@dimen/margin_extra"
         android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
         android:textColor="@color/textGray"
         app:layout_constraintEnd_toStartOf="@+id/tvDistancePlace"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +80,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_extra"
-        android:layout_marginTop="@dimen/margin_small"
         app:layout_constraintBottom_toTopOf="@+id/tvTimeWork"
         app:layout_constraintEnd_toEndOf="@+id/tvDistancePlace"
         app:layout_constraintStart_toStartOf="parent"

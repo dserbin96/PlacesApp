@@ -8,4 +8,5 @@ import io.reactivex.Single
 interface PlaceRepository {
     fun searchPlace(latLng: LatLng): Single<List<PlaceEntity?>>
     fun getPlaceDetatil(id: String): Single<PlaceDetailEntity?>
+    fun getListPhoto(id: String): Single<List<String>>
 }

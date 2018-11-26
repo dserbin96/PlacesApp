@@ -3,7 +3,9 @@ package com.example.dns.placesapp.presentation.ui.feature.place_info
 import android.location.Location
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
@@ -11,9 +13,11 @@ import com.example.dns.placesapp.R
 import com.example.dns.placesapp.presentation.global.model.PlaceDetailViewModel
 import com.example.dns.placesapp.presentation.mvp.feature.place_info.PlaceInfoPresenter
 import com.example.dns.placesapp.presentation.mvp.feature.place_info.PlaceView
+import com.example.dns.placesapp.presentation.ui.adapter.PhotoPlaceAdapter
 import com.example.dns.placesapp.presentation.ui.global.base.BaseFragment
 import com.example.dns.placesapp.presentation.ui.global.expansion.gone
 import com.example.dns.placesapp.presentation.ui.global.expansion.visibile
+import io.rmiri.skeleton.Master.IsCanSetAdapterListener
 import kotlinx.android.synthetic.main.fragment_place_info.*
 import kotlinx.android.synthetic.main.layout_place_card.*
 import java.util.*
@@ -42,6 +46,9 @@ class PlaceInfoFragment : BaseFragment(), PlaceView {
     @InjectPresenter
     lateinit var presenter: PlaceInfoPresenter
 
+    private lateinit var adapter: PhotoPlaceAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
+
     @ProvidePresenter
     fun providePresenter(): PlaceInfoPresenter = providePresenter.get()
 
@@ -50,18 +57,23 @@ class PlaceInfoFragment : BaseFragment(), PlaceView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.start()
+        initView()
     }
 
     fun getArgumentModel(): PlaceDetailViewModel? = arguments?.getParcelable(KEY_MODEL)
 
     fun getArgumentLocation(): Location? = arguments?.getParcelable(KEY_LOCATION)
 
+    override fun showError(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+    }
+
     override fun showInfo(model: PlaceDetailViewModel, myLocation: Location) {
         groupContackt.visibile()
         if (model.basePhoto.isNullOrEmpty()) ivPlace.gone()
         else {
             Glide.with(this).load(model.basePhoto).into(ivPlace)
-            Glide.with(this).load(model.basePhoto).into(ivBasePlace)
+            Glide.with(this).load(model.basePhoto).into(ivCirclePlace)
         }
         tvName.text = model.name
         model.rating?.let { rbPlace.rating = it } ?: let { rbPlace.visibile(false) }
@@ -90,5 +102,21 @@ class PlaceInfoFragment : BaseFragment(), PlaceView {
         } ?: let {
             tvDistancePlace.gone()
         }
+        tvDescription.text = model.description
+    }
+
+    override fun showPhoto(photos: List<String>) {
+
+        context?.let {
+            adapter = PhotoPlaceAdapter(it, rvPlace, photos, IsCanSetAdapterListener {
+                rvPlace.adapter = adapter
+            })
+            linearLayoutManager = LinearLayoutManager(it, LinearLayoutManager.HORIZONTAL, true)
+            rvPlace.layoutManager = linearLayoutManager
+        }
+    }
+
+    private fun initView() {
+
     }
 }

@@ -13,7 +13,8 @@ data class PlaceDetailViewModel(val id: String,
                                 val photosPath: List<String>?,
                                 val basePhoto: String?,
                                 val isOpen: Boolean?,
-                                val timeWork: Calendar?) : Parcelable {
+                                val timeWork: Calendar?,
+                                val description: String?) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
@@ -23,7 +24,8 @@ data class PlaceDetailViewModel(val id: String,
             parcel.createStringArrayList(),
             parcel.readString(),
             parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
-            Calendar.getInstance().apply { time = Date(parcel.readLong()) })
+            Calendar.getInstance().apply { time = Date(parcel.readLong()) },
+            parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
@@ -35,6 +37,7 @@ data class PlaceDetailViewModel(val id: String,
         parcel.writeString(basePhoto)
         parcel.writeValue(isOpen)
         parcel.writeLong(timeWork?.time?.time ?: 0)
+        parcel.writeString(description)
     }
 
     override fun describeContents(): Int {

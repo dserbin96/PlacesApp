@@ -11,4 +11,5 @@ data class PlaceDetailEntity(val id: String,
                              val photosPath: List<String>?,
                              val basePhoto: String?,
                              val isOpen: Boolean?,
-                             val timeWork:String?)
+                             val timeWork: String?,
+                             val description: String?)

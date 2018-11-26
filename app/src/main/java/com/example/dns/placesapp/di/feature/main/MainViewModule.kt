@@ -35,7 +35,7 @@ class MainViewModule {
                         SEARCH -> SearchFragment.getInstance()
                         PLACE_INFO -> {
                             (data as? DataPlaceInfo)?.let {
-                                PlaceInfoFragment.getInstance(it.place)
+                                PlaceInfoFragment.getInstance(it.place, data.location)
                             }
                         }
                         else -> MapsFragment.getInstance()

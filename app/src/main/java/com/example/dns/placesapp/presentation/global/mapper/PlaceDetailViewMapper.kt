@@ -28,7 +28,8 @@ class PlaceDetailViewMapper @Inject constructor() {
                 place?.photosPath,
                 place?.basePhoto,
                 place?.isOpen,
-                time)
+                time,
+                place?.description)
     }
 
 }
